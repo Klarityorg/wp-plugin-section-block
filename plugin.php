@@ -7,6 +7,8 @@
  * Author URI: https://klarity.org/
  * Version: 1.0.0
  * License: Closed source
+ *
+ * @package Klarity
  */
 
 // Exit if accessed directly.

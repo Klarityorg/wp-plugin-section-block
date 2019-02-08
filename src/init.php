@@ -5,7 +5,7 @@
  * Enqueue CSS/JS of all the blocks.
  *
  * @since   1.0.0
- * @package CGB
+ * @package Klarity
  */
 
 // Exit if accessed directly.
