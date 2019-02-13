@@ -3,13 +3,18 @@ import './editor.scss';
 
 const {__} = wp.i18n;
 const {registerBlockType} = wp.blocks;
-const {InnerBlocks} = wp.editor;
+const {InnerBlocks, MediaUpload} = wp.editor;
 
 const colorClasses = {
 	'section-white': __('White (default)'),
 	'section-primary': __('Theme\'s primary color'),
 	'section-secondary': __('Theme\'s secondary color'),
 	'section-tertiary': __('Theme\'s tertiary color')
+};
+
+const widthClasses = {
+	normal: 'Normal',
+	'extra-width': 'Large'
 };
 
 registerBlockType('klarity/section-block', {
@@ -22,17 +27,22 @@ registerBlockType('klarity/section-block', {
 			type: 'string',
 			default: Object.keys(colorClasses)[0]
 		},
-		isLargeSection: {
-			type: 'boolean',
-			default: false
+		widthClass: {
+			type: 'string',
+			default: Object.keys(widthClasses)[0]
+		},
+		backgroundImage: {
+			type: 'string',
+			default: null
 		}
 	},
 
 	edit: props => {
-		let {attributes: {colorClass, isLargeSection}, setAttributes} = props;
+		let {attributes: {colorClass, widthClass, backgroundImage}, setAttributes} = props;
 
-		const setIsLargeSection = event => {
-			setAttributes({isLargeSection: event.target.checked});
+		const setWidthClass = event => {
+			setAttributes({widthClass: event.target.value});
+			event.preventDefault();
 		};
 
 		const setColorClass = event => {
@@ -40,33 +50,82 @@ registerBlockType('klarity/section-block', {
 			event.preventDefault();
 		};
 
+		const setHasColorClass = event => {
+			colorClass = event.target.checked ? Object.keys(colorClasses)[0] : null;
+			backgroundImage = null;
+			setAttributes({backgroundImage, colorClass});
+		};
+
+		const setHasNotColorClass = event => {
+			colorClass = !event.target.checked ? Object.keys(colorClasses)[0] : null;
+			setAttributes({colorClass});
+		};
+
+		const setBackgroundImage = imageObject => {
+			backgroundImage = imageObject.url;
+			setAttributes({backgroundImage});
+		};
+
 		return (
-			<div>
+			<form onSubmit={event => {event.preventDefault();}}>
 				<div className="form-group">
-					<label>{__('Background color')}: </label>
-					<select value={colorClass} onChange={setColorClass}>
-						{Object.keys(colorClasses).map((colorClass) => (
-							<option value={colorClass} selected>{colorClasses[colorClass]}</option>
-						))}
-					</select>
+					<label>{__('Background')}:&nbsp;</label>
+					<div className="form-group">
+						<label>
+							<input type="radio" name="backgroundType" value={!!colorClass} checked={!!colorClass}  onChange={setHasColorClass} />Color: {!!colorClass &&
+						<select value={colorClass} onChange={setColorClass}>
+							{Object.keys(colorClasses).map((colorClass) => (
+								<option value={colorClass} selected>{colorClasses[colorClass]}</option>
+							))}
+						</select>}
+						</label>
+					</div>
+					<div className="form-group">
+						<label>
+							<input type="radio" name="backgroundType" value={!colorClass} checked={!colorClass}  onChange={setHasNotColorClass} />Image: {!colorClass && <MediaUpload
+							onSelect={setBackgroundImage}
+							type="image"
+							value={backgroundImage}
+							render={({ open }) => (
+								<span>
+									<button onClick={open}>
+										Select background
+									</button>
+									<small>{backgroundImage || 'No background image selected'}</small>
+								</span>
+							)}
+						/>}
+						</label>
+					</div>
+
 				</div>
 				<div className="form-group">
-					<label>
-						<input type="checkbox" value={isLargeSection} onChange={setIsLargeSection}/>
-						&nbsp;{__('Large section')}</label>
+					<label>{__('Width')}:&nbsp;
+						<select value={widthClass} onChange={setWidthClass}>
+							{Object.keys(widthClasses).map((widthClass) => (
+								<option value={widthClass} selected>{widthClasses[widthClass]}</option>
+							))}
+						</select>
+					</label>
 				</div>
-				<div className={"wp-block-klarity-section " + colorClass}>
+				<div className={"wp-block-klarity-section " + colorClass} style={{backgroundImage: (colorClass ? 'none' : 'url(' + backgroundImage + ')')}}>
 					<InnerBlocks/>
 				</div>
-			</div>
+			</form>
 		);
 	},
 
 	save: props => {
-		let {attributes: {colorClass, isLargeSection}} = props;
+		let {attributes: {colorClass, widthClass, backgroundImage}} = props;
 		return (
-			<div className={colorClass + (isLargeSection ? ' extra-width' : '')}>
-				<InnerBlocks.Content/>
+			<div className={[colorClass, widthClass, backgroundImage ? 'parallax-container' : ''].join(' ')}>
+				{!backgroundImage && <InnerBlocks.Content/>}
+				{backgroundImage && <span>
+					<div className="container">
+						<InnerBlocks.Content/>
+					</div>
+					<div class="parallax"><img src={backgroundImage} /></div>
+				</span>}
 			</div>
 		);
 	},
