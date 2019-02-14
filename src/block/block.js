@@ -6,7 +6,7 @@ const {registerBlockType} = wp.blocks;
 const {InnerBlocks, MediaUpload} = wp.editor;
 
 const colorClasses = {
-	'section-white': __('White (default)'),
+	'section-default': __('Theme\'s default background color'),
 	'section-primary': __('Theme\'s primary color'),
 	'section-secondary': __('Theme\'s secondary color'),
 	'section-tertiary': __('Theme\'s tertiary color')
