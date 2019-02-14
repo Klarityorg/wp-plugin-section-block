@@ -118,14 +118,8 @@ registerBlockType('klarity/section-block', {
 	save: props => {
 		let {attributes: {colorClass, widthClass, backgroundImage}} = props;
 		return (
-			<div className={[colorClass, widthClass, backgroundImage ? 'parallax-container' : ''].join(' ')}>
-				{!backgroundImage && <InnerBlocks.Content/>}
-				{backgroundImage && <span>
-					<div className="container">
-						<InnerBlocks.Content/>
-					</div>
-					<div class="parallax"><img src={backgroundImage} /></div>
-				</span>}
+			<div className={[colorClass, widthClass, backgroundImage ? 'with-background' : ''].join(' ')} style={backgroundImage ? {backgroundImage: 'url("' + backgroundImage + '")'} : null}>
+				<InnerBlocks.Content/>
 			</div>
 		);
 	},
