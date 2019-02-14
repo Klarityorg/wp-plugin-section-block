@@ -1,3 +1,8 @@
-.with-background {
-  background-size: cover;
+.wp-block-klarity-section-block {
+  &.with-background {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-size: cover;
+  }
 }
+
