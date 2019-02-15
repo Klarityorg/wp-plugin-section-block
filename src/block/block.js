@@ -33,7 +33,7 @@ registerBlockType('klarity/section-block', {
 		},
 		backgroundImage: {
 			type: 'string',
-			default: null
+			default: ''
 		}
 	},
 
@@ -51,13 +51,13 @@ registerBlockType('klarity/section-block', {
 		};
 
 		const setHasColorClass = event => {
-			colorClass = event.target.checked ? Object.keys(colorClasses)[0] : null;
-			backgroundImage = null;
+			colorClass = event.target.checked ? Object.keys(colorClasses)[0] : '';
+			backgroundImage = '';
 			setAttributes({backgroundImage, colorClass});
 		};
 
 		const setHasNotColorClass = event => {
-			colorClass = !event.target.checked ? Object.keys(colorClasses)[0] : null;
+			colorClass = !event.target.checked ? Object.keys(colorClasses)[0] : '';
 			setAttributes({colorClass});
 		};
 
