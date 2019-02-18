@@ -97,7 +97,6 @@ registerBlockType('klarity/section-block', {
 						/>}
 						</label>
 					</div>
-
 				</div>
 				<div className="form-group">
 					<label>{__('Width')}:&nbsp;
@@ -109,6 +108,11 @@ registerBlockType('klarity/section-block', {
 					</label>
 				</div>
 				<div className={"wp-block-klarity-section " + colorClass} style={{backgroundImage: (colorClass ? 'none' : 'url(' + backgroundImage + ')')}}>
+					<div className="msg msg-alert">
+						Due to a Wordpress bug, inserting <pre>Classic</pre> blocks in
+						section blocks may break them.
+						Please refrain from inserting them here!
+					</div>
 					<InnerBlocks/>
 				</div>
 			</form>
