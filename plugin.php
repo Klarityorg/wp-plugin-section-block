@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Klarity section block
- * Plugin URI: https://klarity.org/
+ * Plugin URI: https://github.com/Klarityorg/wp-plugin-section-block
  * Description: Klarity section block
  * Author: Klarity
- * Author URI: https://klarity.org/
+ * Author URI: https://github.com/Klarityorg
  * Version: 1.0.0
  * License: Closed source
  *
