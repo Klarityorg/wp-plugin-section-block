@@ -23,7 +23,7 @@ const widthClasses = {
 	'extra-width': 'Large'
 };
 
-registerBlockType('klarity/section-block', {
+registerBlockType('klarity/klarity-section-block', {
 	title: __('Section'),
 	icon: iconEl,
 	category: 'layout',
