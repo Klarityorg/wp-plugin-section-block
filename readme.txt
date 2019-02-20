@@ -1,5 +1,5 @@
 === Section block ===
-Contributors: Klarity team
+Contributors: klarityorg
 Tags: section, color, background, block, gutenberg
 Requires at least: 5.0.0
 Tested up to: 5.0.3
