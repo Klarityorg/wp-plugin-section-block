@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Section block
+ * Plugin Name: Klarity section block
  * Plugin URI: https://klarity.org/
- * Description: Section block
+ * Description: Klarity section block
  * Author: Klarity
  * Author URI: https://klarity.org/
  * Version: 1.0.0
