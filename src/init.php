@@ -25,7 +25,7 @@ function klarity_section_container_assets() { // phpcs:ignore
 		'klarity_section_container-css', // Handle.
 		plugins_url( 'dist/blocks.style.build.css', __DIR__), // Block style CSS.
 		['wp-editor'], // Dependency to include the CSS after it.
-    filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
+    	filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
 	);
 }
 
@@ -48,7 +48,7 @@ function klarity_section_container_editor_assets() { // phpcs:ignore
 		plugins_url( '/dist/blocks.build.js', __DIR__), // Block.build.js: We register the block here. Built with Webpack.
 		['wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'], // Dependencies, defined above.
 		 filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: File modification time.
-		true // Enqueue the script in the footer.
+		true
 	);
 
 	// Styles.
