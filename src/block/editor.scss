@@ -1,4 +1,9 @@
 .wp-block-klarity-section {
   margin: 0 -16px;
   padding: 0 16px;
+
+  .wp-block {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+  }
 }
